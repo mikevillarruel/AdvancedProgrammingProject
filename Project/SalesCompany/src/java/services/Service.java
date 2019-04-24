@@ -7,12 +7,16 @@ package services;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import modelo.Operations;
+import modelo.Seller;
+import modelo.Ticket;
 
 /**
  * REST Web Service
@@ -24,30 +28,41 @@ public class Service {
 
     @Context
     private UriInfo context;
+    Operations op = new Operations();
 
     /**
-     * Creates a new instance of Services
+     * Creates a new instance of Service
      */
     public Service() {
     }
 
     /**
-     * Retrieves representation of an instance of service.Services
+     * Retrieves representation of an instance of services.Service
+     *
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public Seller getSeller(@PathParam("id") int id) {
+        Seller seller = op.selectSeller(id);
+        return seller;
     }
 
-    /**
-     * PUT method for updating or creating an instance of Services
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @GET
+    @Path("ticket/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Ticket getticket(@PathParam("id") int id) {
+        Ticket ticket = op.selectTicket(id);
+        return ticket;
     }
+    
+    @GET
+    @Path("sellerTicket/{idTicket}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Seller getSellerTicket(@PathParam("idTicket") int id) {
+        Seller seller = op.selectSellerTicket(id);
+        return seller;
+    }
+
 }
