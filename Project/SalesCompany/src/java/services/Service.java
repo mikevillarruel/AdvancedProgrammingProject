@@ -12,7 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import modelo.Operations;
+import modelo.Seller;
 
 /**
  * REST Web Service
@@ -24,6 +27,7 @@ public class Service {
 
     @Context
     private UriInfo context;
+    Operations op = new Operations();
 
     /**
      * Creates a new instance of Services
@@ -36,18 +40,10 @@ public class Service {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public Seller getJson(@PathParam("id") int id) {
+        return op.selectSeller(id);
     }
 
-    /**
-     * PUT method for updating or creating an instance of Services
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
 }
