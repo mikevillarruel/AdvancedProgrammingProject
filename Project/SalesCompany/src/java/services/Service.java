@@ -56,5 +56,13 @@ public class Service {
         Ticket ticket = op.selectTicket(id);
         return ticket;
     }
+    
+    @GET
+    @Path("sellerTicket/{idTicket}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Seller getSellerTicket(@PathParam("idTicket") int id) {
+        Seller seller = op.selectSellerTicket(id);
+        return seller;
+    }
 
 }

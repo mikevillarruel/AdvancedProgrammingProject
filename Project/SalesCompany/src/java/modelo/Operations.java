@@ -54,5 +54,22 @@ public class Operations {
         }
         return ticket;
     }
+    
+    public Seller selectSellerTicket(int idTicket) {
+        Seller seller = new Seller();
+        try {
+            conex = new Conexion();
+            query = "SELECT * FROM seller where idSeller = (SELECT idSeller FROM ticket where idTicket ="+idTicket+")";
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);
+            while (rs.next()) {
+                seller = new Seller(rs.getInt("idSeller"), rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+
+        }
+        return seller;
+    }
 
 }
