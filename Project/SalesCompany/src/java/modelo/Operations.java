@@ -71,22 +71,21 @@ public class Operations {
         return seller;
     }
     
-    public Ticket calculateDay(int idTicket){
-        
-        
-        Ticket ticket = new Ticket();
+    public Date calculateDay(int idTicket){
+        Date date=null;
+       
        try {
             conex = new Conexion();
             query = "Select * From ticket where idTicket=" + idTicket;
             pst = conex.getConexion().prepareStatement(query);
             rs = pst.executeQuery(query);
             while (rs.next()) {
-                ticket = new Ticket(rs.getDate("date"));
+                date = rs.getDate("date");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
         }
-        return ticket;
+        return date;
     
     }
     
