@@ -7,6 +7,7 @@ package modelo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -17,30 +18,25 @@ import javax.swing.JOptionPane;
 public class Operations {
     
     private Conexion conex;
-    private PreparedStatement prepareStatement;
-    private ResultSet result;
-    private Statement statement;
+    private PreparedStatement pst;
+    private ResultSet rs;
     private String query;
     
-    public Seller selectSeller(int idSeller){     
-        query = 
-                "select *\n"
-                + "from seller\n"
-                + "where idSeller = " + idSeller;
+    public Seller selectSeller(int id){
+        Seller seller = new Seller();
         try{
             conex = new Conexion();
-            statement = conex.getConexion().createStatement();
-            result = statement.executeQuery(query);
-            if(result.next()){
-                return new Seller(result.getInt("idCourse"),result.getString("name"),result.getString("lastName"),result.getString("address"),result.getString("telephone"),result.getString("email"));
+            query="Select * From seller where idSeller="+id;
+            pst = conex.getConexion().prepareStatement(query);
+            rs=pst.executeQuery(query);
+            while(rs.next()){
+                seller = new Seller(rs.getInt("idSeller"),rs.getString("name"),rs.getString("lastName"),rs.getString("address"),rs.getString("telephone"),rs.getString("email"));
             }
-            statement.close();
-            result.close();
-            conex.desconectar();
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+        
         }
-        return null;
+        return seller;
     }
     
     
