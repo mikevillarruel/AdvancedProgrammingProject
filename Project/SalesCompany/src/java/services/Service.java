@@ -76,4 +76,12 @@ public class Service {
         Ticket ticket = op.calculateDay(id);
      return ticket;
     } 
+    
+    @GET
+    @Path("calculateDiscount/{idTicket}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getDiscount(@PathParam("idTicket") int id) {
+        double discount = op.calculateDiscount(id);
+        return "El descuento es de: "+ "$" +discount;
+    }
 }

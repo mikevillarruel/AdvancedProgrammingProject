@@ -89,5 +89,25 @@ public class Operations {
         return ticket;
     
     }
+    
+    public double calculateDiscount(int id) {
+        double price=0;
+        int discount=0;
+        try {
+            conex = new Conexion();
+            query = "Select price,discount From ticket where idTicket=" + id;
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);
+            while (rs.next()) {
+                price = rs.getDouble("price");
+                discount = rs.getInt("discount");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+
+        }
+        return (price * discount/100);
+    }
+    
 }
 
