@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Date;
 import javax.json.JsonObject;
+import javax.management.OperationsException;
 
 
 public class Operations {
@@ -16,6 +17,7 @@ public class Operations {
     private PreparedStatement pst;
     private ResultSet rs;
     private String query;
+    public static String json;
 
     public Seller selectSeller(int id) {
         Seller seller = new Seller();
@@ -84,8 +86,8 @@ public class Operations {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
         }
-       
         return ticket;
     
     }
 }
+

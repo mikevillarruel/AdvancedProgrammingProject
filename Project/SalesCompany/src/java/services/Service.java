@@ -74,14 +74,6 @@ public class Service {
     public Ticket calculateTripDay(@PathParam("idTicket") int id) {
 
         Ticket ticket = op.calculateDay(id);
-       
-        return ticket;
-    }
-    
-        public static void main(String[] args) {
-        // TODO code application logic here
-            System.out.println(""+json);
-
-    }
-    
+     return ticket;
+    } 
 }
