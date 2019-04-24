@@ -8,7 +8,6 @@ package modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,5 +38,21 @@ public class Operations {
         return seller;
     }
     
+    public Ticket selectTicket(int id){
+        Ticket ticket = new Ticket();
+        try{
+            conex = new Conexion();
+            query="Select * From ticket where idTicket="+id;
+            pst = conex.getConexion().prepareStatement(query);
+            rs=pst.executeQuery(query);
+            while(rs.next()){
+                ticket = new Ticket(rs.getInt("idTicket"),rs.getInt("idSeller"),rs.getDouble("price"),rs.getString("departure"),rs.getString("arrival"),rs.getString("class"),rs.getDate("date"),rs.getTime("hour"),rs.getString("airline"),rs.getString("gate"),rs.getString("flightNumber"),rs.getString("seat"),rs.getInt("stock"),rs.getInt("discount"),rs.getBoolean("state"));
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+        
+        }
+        return ticket;
+    }
     
 }
