@@ -113,4 +113,12 @@ public class Service {
         double discount = op.calculateDiscount(id);
         return "El descuento es de: "+ "$" +discount;
     }
+    
+    @GET
+    @Path("calculateCommission/{idTicket}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCommission(@PathParam("idTicket") int id) {
+        double commission = op.calculateCommission(id);
+        return "La comision es de: "+ "$" +commission;
+    }
 }
