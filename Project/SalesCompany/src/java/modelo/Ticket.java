@@ -51,6 +51,12 @@ public class Ticket {
         this.state = state;
     }
 
+    public Ticket(Date date) {
+        this.date = date;
+    }
+    
+    
+
     /**
      * @return the idTicket
      */

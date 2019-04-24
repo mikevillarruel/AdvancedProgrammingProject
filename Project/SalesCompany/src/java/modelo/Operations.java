@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
+import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.Date;
+import javax.json.JsonObject;
 
-/**
- *
- * @author Mike
- */
+
 public class Operations {
 
     private Conexion conex;
@@ -52,6 +48,7 @@ public class Operations {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
 
         }
+
         return ticket;
     }
 
@@ -72,4 +69,23 @@ public class Operations {
         return seller;
     }
     
+    public Ticket calculateDay(int idTicket){
+        
+        
+        Ticket ticket = new Ticket();
+       try {
+            conex = new Conexion();
+            query = "Select * From ticket where idTicket=" + idTicket;
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);
+            while (rs.next()) {
+                ticket = new Ticket(rs.getDate("date"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+        }
+       
+        return ticket;
+    
+    }
 }

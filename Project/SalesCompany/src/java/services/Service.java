@@ -5,6 +5,8 @@
  */
 package services;
 
+import com.google.gson.Gson;
+import java.sql.Date;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -29,6 +31,7 @@ public class Service {
     @Context
     private UriInfo context;
     Operations op = new Operations();
+    static String json;
 
     /**
      * Creates a new instance of Service
@@ -64,5 +67,21 @@ public class Service {
         Seller seller = op.selectSellerTicket(id);
         return seller;
     }
+    
+    @GET
+    @Path("calculateDate/{idTicket}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Ticket calculateTripDay(@PathParam("idTicket") int id) {
 
+        Ticket ticket = op.calculateDay(id);
+       
+        return ticket;
+    }
+    
+        public static void main(String[] args) {
+        // TODO code application logic here
+            System.out.println(""+json);
+
+    }
+    
 }
