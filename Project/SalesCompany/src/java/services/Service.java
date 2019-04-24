@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package services;
 
 import java.text.DateFormat;
@@ -22,11 +18,7 @@ import modelo.Operations;
 import modelo.Seller;
 import modelo.Ticket;
 
-/**
- * REST Web Service
- *
- * @author Mike
- */
+
 @Path("service")
 public class Service {
 
@@ -35,17 +27,11 @@ public class Service {
     Operations op = new Operations();
     static String json;
 
-    /**
-     * Creates a new instance of Service
-     */
+  
     public Service() {
     }
 
-    /**
-     * Retrieves representation of an instance of services.Service
-     *
-     * @return an instance of java.lang.String
-     */
+
     @GET
     @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
