@@ -13,10 +13,13 @@
                     <file>${libs.MySQLDriver.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+<<<<<<< HEAD
                 <library dirs="200">
                     <file>${file.reference.mariadb-java-client-2.4.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+>>>>>>> 5607b2047e75a4309fe8a7a2da757e59153cc092
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>

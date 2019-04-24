@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Septimo/Progra%20Avanzada/AdvancedProgrammingProject/Project/SalesCompany/src/java/services/Service.java</file>
             <file>file:/D:/Septimo/Progra%20Avanzada/AdvancedProgrammingProject/Project/SalesCompany/src/java/modelo/Conexion.java</file>
             <file>file:/D:/Septimo/Progra%20Avanzada/AdvancedProgrammingProject/Project/SalesCompany/src/java/modelo/Seller.java</file>
             <file>file:/D:/Septimo/Progra%20Avanzada/AdvancedProgrammingProject/Project/SalesCompany/src/java/modelo/Operations.java</file>
             <file>file:/D:/Septimo/Progra%20Avanzada/AdvancedProgrammingProject/Project/SalesCompany/src/java/services/ApplicationConfig.java</file>
+=======
+            <file>file:/D:/Documents/GitHub/AdvancedProgrammingProject/Project/SalesCompany/web/index.html</file>
+            <file>file:/D:/Documents/GitHub/AdvancedProgrammingProject/Project/SalesCompany/src/java/services/Service.java</file>
+>>>>>>> 5607b2047e75a4309fe8a7a2da757e59153cc092
         </group>
     </open-files>
 </project-private>
