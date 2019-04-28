@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,9 +54,8 @@ public class Operations {
     }
     
     public boolean insertTicket(Ticket ticket){
-        try{
-            Conexion conex = new Conexion();            
-            String query = "insert into ticket (idTicket, idSeller, price, departure, arrival, class, date, hour, airline, gate, flightNumber, seat, stock, discount) " + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";          
+        try{            
+            String query = "INSERT INTO ticket (IDTICKET, IDSELLER, PRICE, DEPARTURE, ARRIVAL, CLASS, DATE, HOUR, AIRLINE, GATE, FLIGHTNUMBER, SEAT, STOCK, DISCOUNT) " + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";          
             PreparedStatement pst = conex.getConexion().prepareStatement(query);
             pst.setInt(1, ticket.getIdTicket());
             pst.setInt(2, ticket.getIdSeller());
@@ -74,10 +74,33 @@ public class Operations {
             pst.executeUpdate();         
             conex.desconectar();
             pst.close();
+            
         }catch(SQLException e){
-            return false;
+            System.out.println("" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
         }
         return true;
+    }
+
+    public void insertSeller(Seller seller){
+         Connection cn;
+         conex = new Conexion();
+         cn=conex.getConexion();
+         try {
+            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?)");
+            orden.setInt(1, seller.getIdSeller());
+            orden.setString(2, seller.getName());
+            orden.setString(3, seller.getLastName());
+            orden.setString(4, seller.getAddress());
+            orden.setString(5, seller.getTelephone());
+            orden.setString(6, seller.getEmail());
+            orden.execute();            
+            orden.close();              
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
+        }
     }
     
     public boolean deleteTicket(int idTicket) {

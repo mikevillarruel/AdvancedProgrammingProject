@@ -66,6 +66,28 @@ public class Service {
             return false;
         }
     }
+    
+    @POST
+    @Path("setSeller")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    
+    public Seller setSeller(Seller seller){
+        try{
+            Gson gson = new Gson();
+            String json = gson.toJson(seller);
+            gson.toJsonTree(seller);
+            Seller seller1 = new Gson().fromJson(json, Seller.class);
+            Operations op = new Operations();            
+            op.insertSeller(seller1); 
+            
+            return seller1;
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }        
+    }
 
     @GET
     @Path("sellerTicket/{idTicket}")
