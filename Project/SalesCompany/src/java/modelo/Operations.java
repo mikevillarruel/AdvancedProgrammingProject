@@ -196,14 +196,16 @@ public class Operations {
         String query = "Delete From seller Where idseller=?";          
         
         try {
+            conex = new Conexion();
             PreparedStatement pst = conex.getConexion().prepareStatement(query);
-            pst = conex.getConexion().prepareStatement(query);
+            
             pst.setInt(1, id);
-            rs = pst.executeQuery(query);   
+            pst.executeUpdate();   
             pst.close();
+            System.out.println("registro borrado");
             return true;
         } catch (SQLException e) {
-            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
             return false;
         }           
     }
