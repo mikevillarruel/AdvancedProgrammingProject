@@ -11,6 +11,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
@@ -147,8 +148,17 @@ public class Service {
     @DELETE
     @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean deleteSeller(@PathParam("id") int id){
-        boolean ok = op.deleteSeller(id);
-        return ok;
+    public void deleteSeller(@PathParam("id") int id){
+         op.deleteSeller(id);
+    }
+    
+    @PUT
+    @Path("seller/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Seller updateSeller(@PathParam("id") int id, Seller seller){
+        
+        
+        return null;
     }
 }
