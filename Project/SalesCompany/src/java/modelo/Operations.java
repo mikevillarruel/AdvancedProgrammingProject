@@ -193,11 +193,12 @@ public class Operations {
     }
     
     public boolean deleteSeller(int id){
-        String query = "Delete From seller Where idseller="+id;          
+        String query = "Delete From seller Where idseller=?";          
         
         try {
             PreparedStatement pst = conex.getConexion().prepareStatement(query);
             pst = conex.getConexion().prepareStatement(query);
+            pst.setInt(1, id);
             rs = pst.executeQuery(query);   
             pst.close();
             return true;
