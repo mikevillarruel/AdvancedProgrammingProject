@@ -106,7 +106,14 @@ public class Seller {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Seller{" + "idSeller=" + idSeller + ", name=" + name + 
+                ", lastName=" + lastName + ", address=" + address + 
+                ", telephone=" + telephone + ", email=" + email + '}';
+    }
+        
 }
 
 

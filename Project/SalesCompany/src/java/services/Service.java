@@ -28,7 +28,7 @@ public class Service {
     private UriInfo context;
     Operations op = new Operations();
     static String json;
-
+    Seller seller1;
   
     public Service() {
     }
@@ -110,18 +110,18 @@ public class Service {
         double commission = op.calculateCommission(id);
         return "La comision es de: "+ "$" +commission;
     }
-    
+      
     @POST
     @Path("setSeller")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     
-    public Seller addTiger(Seller seller){
+    public Seller addSeller(Seller seller){
         try{
             Gson gson = new Gson();
             String json = gson.toJson(seller);
             gson.toJsonTree(seller);
-            Seller seller1 = new Gson().fromJson(json, Seller.class);
+            seller1 = new Gson().fromJson(json, Seller.class);
             Operations op = new Operations();            
             op.insertSeller(seller1); 
            
@@ -131,5 +131,5 @@ public class Service {
             System.out.println(e.getMessage());
             return null;
         }        
-    }
+    }  
 }

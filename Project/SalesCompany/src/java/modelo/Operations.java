@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import javax.json.JsonObject;
 import javax.management.OperationsException;
+import services.Service;
 
 
 public class Operations {
@@ -136,7 +137,7 @@ public class Operations {
         public void insertSeller(Seller seller){
             
             conex = new Conexion();
-            cn = conex.getConexion();
+            cn = conex.getConexion();            
             
          try {
             PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?)");
@@ -153,8 +154,6 @@ public class Operations {
             System.out.println("" + e.getMessage());
             JOptionPane.showMessageDialog(null, "No se registro");
         }
-    }
-    
-    
+    }     
 }
 
