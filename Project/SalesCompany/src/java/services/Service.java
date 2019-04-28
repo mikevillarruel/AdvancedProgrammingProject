@@ -143,5 +143,12 @@ public class Service {
     public String getCommission(@PathParam("idTicket") int id) {
         return "La comision es de: " + "$" + op.calculateCommission(id);
     }
-
+    
+    @DELETE
+    @Path("seller/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Boolean deleteSeller(@PathParam("id") int id){
+        boolean ok = op.deleteSeller(id);
+        return ok;
+    }
 }

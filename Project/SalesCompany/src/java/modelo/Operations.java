@@ -190,6 +190,19 @@ public class Operations {
         return (price - (price * discount/100))*0.05;
     }
     
-    
+    public boolean deleteSeller(int id){
+        String query = "Delete From seller Where idseller="+id;          
+        
+        try {
+            PreparedStatement pst = conex.getConexion().prepareStatement(query);
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);   
+            pst.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getCause());
+            return false;
+        }           
+    }
 }
 
