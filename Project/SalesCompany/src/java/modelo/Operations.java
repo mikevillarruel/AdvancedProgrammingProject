@@ -1,7 +1,11 @@
 
 package modelo;
 
+import modelo.Conexion;
+import Clases.Ticket;
+import Clases.Seller;
 import com.google.gson.Gson;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +18,7 @@ import javax.management.OperationsException;
 public class Operations {
 
     private Conexion conex;
+    Connection cn;
     private PreparedStatement pst;
     private ResultSet rs;
     private String query;
@@ -125,6 +130,29 @@ public class Operations {
 
         }
         return (price - (price * discount/100))*0.05;
+    }
+    
+    
+        public void insertSeller(Seller seller){
+            
+            conex = new Conexion();
+            cn = conex.getConexion();
+            
+         try {
+            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?)");
+            orden.setInt(1, seller.getIdSeller());
+            orden.setString(2, seller.getName());
+            orden.setString(3, seller.getLastName());
+            orden.setString(4, seller.getAddress());
+            orden.setString(5, seller.getTelephone());
+            orden.setString(6, seller.getEmail());
+            orden.execute();            
+            orden.close();              
+                    
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
+        }
     }
     
     

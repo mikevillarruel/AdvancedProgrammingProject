@@ -1,5 +1,5 @@
 
-package modelo;
+package Clases;
 
 
 public class Seller {
@@ -107,6 +107,13 @@ public class Seller {
         this.email = email;
     }
     
-    
-    
 }
+
+
+
+    
+
+    
+    
+    
+    

@@ -1,5 +1,5 @@
 
-package modelo;
+package Clases;
 
 import java.sql.Date;
 import java.sql.Time;

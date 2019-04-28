@@ -15,8 +15,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.Operations;
-import modelo.Seller;
-import modelo.Ticket;
+import Clases.Seller;
+import Clases.Ticket;
+import com.google.gson.Gson;
+import javax.ws.rs.POST;
 
 
 @Path("service")
@@ -100,11 +102,34 @@ public class Service {
         return "El descuento es de: "+ "$" +discount;
     }
     
+    
     @GET
     @Path("calculateCommission/{idTicket}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getCommission(@PathParam("idTicket") int id) {
         double commission = op.calculateCommission(id);
         return "La comision es de: "+ "$" +commission;
+    }
+    
+    @POST
+    @Path("setSeller")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    
+    public Seller addTiger(Seller seller){
+        try{
+            Gson gson = new Gson();
+            String json = gson.toJson(seller);
+            gson.toJsonTree(seller);
+            Seller seller1 = new Gson().fromJson(json, Seller.class);
+            Operations op = new Operations();            
+            op.insertSeller(seller1); 
+           
+            return seller1;
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }        
     }
 }
