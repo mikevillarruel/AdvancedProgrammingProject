@@ -87,13 +87,15 @@ public class Operations {
          conex = new Conexion();
          cn=conex.getConexion();
          try {
-            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?)");
+            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, USERNAME, PASSWORD, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?,?,?)");
             orden.setInt(1, seller.getIdSeller());
-            orden.setString(2, seller.getName());
-            orden.setString(3, seller.getLastName());
-            orden.setString(4, seller.getAddress());
-            orden.setString(5, seller.getTelephone());
-            orden.setString(6, seller.getEmail());
+            orden.setString(2, seller.getUserName());
+            orden.setString(3, seller.getPassword());
+            orden.setString(4, seller.getName());
+            orden.setString(5, seller.getLastName());
+            orden.setString(6, seller.getAddress());
+            orden.setString(7, seller.getTelephone());
+            orden.setString(8, seller.getEmail());
             orden.execute();            
             orden.close();              
             
