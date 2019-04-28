@@ -194,20 +194,29 @@ public class Operations {
     
     public boolean deleteSeller(int id){
         String query = "Delete From seller Where idseller=?";          
-        
+        String sql = "Delete From ticket Where idseller=?";
         try {
             conex = new Conexion();
-            PreparedStatement pst = conex.getConexion().prepareStatement(query);
+            PreparedStatement pst = conex.getConexion().prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();         
             
+            
+            
+            pst = conex.getConexion().prepareStatement(query);
             pst.setInt(1, id);
             pst.executeUpdate();   
             pst.close();
             System.out.println("registro borrado");
+            
+            
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }           
     }
+    
+    
 }
 

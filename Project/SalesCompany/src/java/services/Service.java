@@ -148,8 +148,7 @@ public class Service {
     @DELETE
     @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteSeller(@PathParam("id") int id){
-        
+    public void deleteSeller(@PathParam("id") int id){        
          op.deleteSeller(id);
     }
     
