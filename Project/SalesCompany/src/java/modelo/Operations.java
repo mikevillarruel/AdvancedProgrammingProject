@@ -1,25 +1,17 @@
 
 package modelo;
 
-import modelo.Conexion;
-import Clases.Ticket;
-import Clases.Seller;
-import com.google.gson.Gson;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Date;
-import javax.json.JsonObject;
-import javax.management.OperationsException;
-import services.Service;
+import java.sql.Time;
 
 
 public class Operations {
 
     private Conexion conex;
-    Connection cn;
     private PreparedStatement pst;
     private ResultSet rs;
     private String query;
@@ -33,7 +25,7 @@ public class Operations {
             pst = conex.getConexion().prepareStatement(query);
             rs = pst.executeQuery(query);
             while (rs.next()) {
-                seller = new Seller(rs.getInt("idSeller"), rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"));
+                seller = new Seller(rs.getInt("idSeller"), rs.getString("userName"),null,rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"),rs.getDouble("pendingValues"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
@@ -50,7 +42,7 @@ public class Operations {
             pst = conex.getConexion().prepareStatement(query);
             rs = pst.executeQuery(query);
             while (rs.next()) {
-                ticket = new Ticket(rs.getInt("idTicket"), rs.getInt("idSeller"), rs.getDouble("price"), rs.getString("departure"), rs.getString("arrival"), rs.getString("class"), rs.getDate("date"), rs.getTime("hour"), rs.getString("airline"), rs.getString("gate"), rs.getString("flightNumber"), rs.getString("seat"), rs.getInt("stock"), rs.getInt("discount"), rs.getBoolean("state"));
+                ticket = new Ticket(rs.getInt("idTicket"), rs.getInt("idSeller"), rs.getDouble("price"), rs.getString("departure"), rs.getString("arrival"), rs.getString("class"), rs.getDate("date"), rs.getTime("hour"), rs.getString("airline"), rs.getString("gate"), rs.getString("flightNumber"), rs.getString("seat"), rs.getInt("stock"), rs.getInt("discount"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
@@ -59,7 +51,49 @@ public class Operations {
 
         return ticket;
     }
-
+    
+    public boolean insertTicket(Ticket ticket){
+        try{
+            Conexion conex = new Conexion();            
+            String query = "insert into ticket (idTicket, idSeller, price, departure, arrival, class, date, hour, airline, gate, flightNumber, seat, stock, discount) " + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";          
+            PreparedStatement pst = conex.getConexion().prepareStatement(query);
+            pst.setInt(1, ticket.getIdTicket());
+            pst.setInt(2, ticket.getIdSeller());
+            pst.setDouble(3, ticket.getPrice());
+            pst.setString(4, ticket.getDeparture());
+            pst.setString(5, ticket.getArrival());
+            pst.setString(6, ticket.getClas());
+            pst.setDate(7, ticket.getDate());
+            pst.setTime(8, ticket.getHour());
+            pst.setString(9, ticket.getAirline());
+            pst.setString(10, ticket.getGate());
+            pst.setString(11, ticket.getFlightNumber());
+            pst.setString(12, ticket.getSeat());
+            pst.setInt(13, ticket.getStock());
+            pst.setDouble(14, ticket.getDiscount());
+            pst.executeUpdate();         
+            conex.desconectar();
+            pst.close();
+        }catch(SQLException e){
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean deleteTicket(int idTicket) {
+        
+        try {
+            conex = new Conexion();
+            query = "delete from ticket where idTicket = "+idTicket;
+            pst = conex.getConexion().prepareStatement(query);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+        
+    }
+    
     public Seller selectSellerTicket(int idTicket) {
         Seller seller = new Seller();
         try {
@@ -68,7 +102,7 @@ public class Operations {
             pst = conex.getConexion().prepareStatement(query);
             rs = pst.executeQuery(query);
             while (rs.next()) {
-                seller = new Seller(rs.getInt("idSeller"), rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"));
+                seller = new Seller(rs.getInt("idSeller"), rs.getString("userName"),null,rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"),rs.getDouble("pendingValues"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
@@ -134,26 +168,5 @@ public class Operations {
     }
     
     
-        public void insertSeller(Seller seller){
-            
-            conex = new Conexion();
-            cn = conex.getConexion();            
-            
-         try {
-            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?)");
-            orden.setInt(1, seller.getIdSeller());
-            orden.setString(2, seller.getName());
-            orden.setString(3, seller.getLastName());
-            orden.setString(4, seller.getAddress());
-            orden.setString(5, seller.getTelephone());
-            orden.setString(6, seller.getEmail());
-            orden.execute();            
-            orden.close();              
-                    
-        } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se registro");
-        }
-    }     
 }
 
