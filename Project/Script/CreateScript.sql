@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     23/04/2019 16:14:25                          */
+/* Created on:     27/04/2019 23:12:34                          */
 /*==============================================================*/
 
 
@@ -14,11 +14,14 @@ drop table if exists TICKET;
 create table SELLER
 (
    IDSELLER             int not null,
+   USERNAME             char(32) not null,
+   PASSWORD             char(32) not null,
    NAME                 varchar(32),
    LASTNAME             varchar(32),
    ADDRESS              varchar(32),
    TELEPHONE            char(10),
    EMAIL                varchar(64),
+   PENDINGVALUES        double,
    primary key (IDSELLER)
 );
 
@@ -41,7 +44,6 @@ create table TICKET
    SEAT                 varchar(32),
    STOCK                int,
    DISCOUNT             int,
-   STATE                boolean,
    primary key (IDTICKET)
 );
 
