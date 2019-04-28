@@ -260,5 +260,16 @@ public class Ticket {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" + "idTicket=" + idTicket + ", idSeller=" + idSeller + 
+                ", price=" + price + ", departure=" + departure + 
+                ", arrival=" + arrival + ", clas=" + clas + 
+                ", date=" + date + ", hour=" + hour + ", airline=" + airline + 
+                ", gate=" + gate + ", flightNumber=" + flightNumber + 
+                ", seat=" + seat + ", stock=" + stock + ", discount=" + discount + 
+                ", state=" + state + '}';
+    }
+
     
 }
