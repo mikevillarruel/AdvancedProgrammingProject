@@ -30,12 +30,67 @@ public class Service {
     public Service() {
     }
 
+    @POST
+    @Path("login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean login(Seller seller) {
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(seller);
+            gson.toJsonTree(seller);
+            seller = new Gson().fromJson(json, Seller.class);
+            return op.login(seller);
+        } catch (JsonSyntaxException e) {
+            return false;
+        }
+    }
+
     @GET
     @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Seller getSeller(@PathParam("id") int id) {
         Seller seller = op.selectSeller(id);
         return seller;
+    }
+
+    @DELETE
+    @Path("seller/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Boolean deleteSeller(@PathParam("id") int id) {
+        return op.deleteSeller(id);
+    }
+
+    @PUT
+    @Path("seller/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Seller updateSeller(@PathParam("id") int id, Seller seller) {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(seller);
+        gson.toJsonTree(seller);
+        Seller seller1 = new Gson().fromJson(json, Seller.class);
+
+        seller1.setIdSeller(id);
+        op.updateSeller(seller1);
+        return seller1;
+    }
+
+    @POST
+    @Path("setSeller")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean addSeller(Seller seller) {
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(seller);
+            gson.toJsonTree(seller);
+            seller = new Gson().fromJson(json, Seller.class);
+            return op.insertSeller(seller);
+        } catch (JsonSyntaxException e) {
+            return false;
+        }
     }
 
     @GET
@@ -66,22 +121,6 @@ public class Service {
         } catch (JsonSyntaxException e) {
             return false;
         }
-    }
-    
-    @POST
-    @Path("setSeller")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)    
-    public boolean addSeller(Seller seller){
-        try{
-            Gson gson = new Gson();
-            String json = gson.toJson(seller);
-            gson.toJsonTree(seller);
-            seller = new Gson().fromJson(json, Seller.class); 
-            return op.insertSeller(seller);
-        }catch(JsonSyntaxException e){
-            return false;
-        }        
     }
 
     @GET
@@ -138,27 +177,27 @@ public class Service {
     public String getCommission(@PathParam("idTicket") int id) {
         return "La comision es de: " + "$" + op.calculateCommission(id);
     }
-    
-    @DELETE
-    @Path("seller/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean deleteSeller(@PathParam("id") int id){        
-         return op.deleteSeller(id);
-    }
-    
-    @PUT
-    @Path("seller/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Seller updateSeller(@PathParam("id") int id, Seller seller){
-        
-        Gson gson = new Gson();
-        String json = gson.toJson(seller);
-        gson.toJsonTree(seller);
-        Seller seller1 = new Gson().fromJson(json, Seller.class);
 
-        seller1.setIdSeller(id);
-        op.updateSeller(seller1);
-        return seller1;
+    @GET
+    @Path("comprar/{id}/{cantidad}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String buy(@PathParam("id") int id, @PathParam("cantidad") int cantidad) {
+        
+        if (op.updateTicket(id, cantidad)) {
+            Ticket ticket = op.selectTicket(id);
+            double price = ticket.getPrice();
+            double discount = (double) ticket.getDiscount();
+            price = price * cantidad;
+            discount = (price * (discount / 100));
+            double total = price - discount;
+            op.updatePendingValues((total*0.08), id);
+            return "Subtotal: " + price
+                    + "\nDiscount: " + discount
+                    + "\nTotal: " + total+
+                    "\nComision: "+(total*0.08);
+        } else {
+            return "No hay suficiente stock";
+        }
     }
+
 }

@@ -28,18 +28,6 @@ public class Seller {
         this.email = email;
         this.pendingValues = pendingValues;
     }
-
-    public Seller(String userName, String password, String name, String lastName, String address, String telephone, String email, double pendingValues) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.telephone = telephone;
-        this.email = email;
-        this.pendingValues = pendingValues;
-    }
-
     
     /**
      * @return the idSeller
