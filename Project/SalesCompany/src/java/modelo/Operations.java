@@ -54,7 +54,8 @@ public class Operations {
     }
     
     public boolean insertTicket(Ticket ticket){
-        try{            
+        try{
+            conex = new Conexion();
             String query = "INSERT INTO ticket (IDTICKET, IDSELLER, PRICE, DEPARTURE, ARRIVAL, CLASS, DATE, HOUR, AIRLINE, GATE, FLIGHTNUMBER, SEAT, STOCK, DISCOUNT) " + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";          
             PreparedStatement pst = conex.getConexion().prepareStatement(query);
             pst.setInt(1, ticket.getIdTicket());
