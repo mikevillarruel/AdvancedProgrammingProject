@@ -85,7 +85,7 @@ public class Operations {
     public boolean insertSeller(Seller seller){
          try {
             conex = new Conexion();
-            String query = "INSERT INTO seller (IDSELLER, USERNAME, PASSWORD, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO seller (IDSELLER, USERNAME, PASSWORD, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL, PENDINGVALUES) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement orden = conex.getConexion().prepareStatement(query);
             orden.setInt(1, seller.getIdSeller());
             orden.setString(2, seller.getUserName());
@@ -95,6 +95,7 @@ public class Operations {
             orden.setString(6, seller.getAddress());
             orden.setString(7, seller.getTelephone());
             orden.setString(8, seller.getEmail());
+            orden.setDouble(9, seller.getPendingValues());
             orden.executeUpdate();
             conex.desconectar();            
             orden.close();              
