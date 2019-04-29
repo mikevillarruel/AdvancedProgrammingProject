@@ -217,10 +217,8 @@ public class Operations {
     
     public boolean updateSeller(Seller seller){
         try {
-            Seller sel = selectSeller(seller.getIdSeller());
-
             conex = new Conexion();
-            String sql = "Update seller Set name=?, lastname=?, address=?, telephone=?, email=? Where idseller=? ";
+            String sql = "Update seller Set name=?, lastname=?, address=?, telephone=?, email=? Where idseller=?;";
             PreparedStatement pst = conex.getConexion().prepareStatement(sql);
             pst.setString(1, seller.getName());
             pst.setString(2, seller.getLastName());
@@ -232,7 +230,7 @@ public class Operations {
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\t\tError al actualizar base de datos: "+e.getMessage());
             return false;
         }
     }

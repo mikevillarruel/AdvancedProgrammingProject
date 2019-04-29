@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class Conexion {
 
-    static String bd="salescompany";
+    static String bd="prograAvanzada";
     static String login="root";
-    static String password="ferxoes1697";
+    static String password="root";
     static String url="jdbc:mysql://localhost/"+bd;
     
     Connection conn=null;

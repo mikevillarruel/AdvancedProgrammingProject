@@ -159,6 +159,6 @@ public class Service {
 
         seller1.setIdSeller(id);
         op.updateSeller(seller1);
-        return op.selectSeller(id);
+        return seller1;
     }
 }
