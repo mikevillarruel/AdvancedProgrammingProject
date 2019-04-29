@@ -215,7 +215,7 @@ public class Operations {
         }           
     } 
     
-    public boolean update(Seller seller){
+    public boolean updateSeller(Seller seller){
         try {
             Seller sel = selectSeller(seller.getIdSeller());
 
