@@ -199,24 +199,24 @@ public class Operations {
             conex = new Conexion();
             PreparedStatement pst = conex.getConexion().prepareStatement(sql);
             pst.setInt(1, id);
-            pst.executeUpdate();         
-            
-            
+            pst.executeUpdate();              
             
             pst = conex.getConexion().prepareStatement(query);
             pst.setInt(1, id);
             pst.executeUpdate();   
             pst.close();
-            System.out.println("registro borrado");
-            
+            System.out.println("registro borrado");            
             
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }           
+    } 
+    
+    public boolean update(int id){
+        
+        return true;
     }
-    
-    
 }
 
