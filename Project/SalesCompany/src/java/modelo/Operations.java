@@ -224,7 +224,7 @@ public class Operations {
             pst.setString(2, seller.getLastName());
             pst.setString(3, seller.getAddress());
             pst.setString(4, seller.getTelephone());
-            pst.setString(5, seller.getTelephone());
+            pst.setString(5, seller.getEmail());
             pst.setInt(6, seller.getIdSeller());
 
             pst.executeUpdate();
