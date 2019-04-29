@@ -298,6 +298,30 @@ public class Operations {
             return false;
         }
     }
+    
+    public boolean setPay(int idSeller, double deposit){
+        try{
+            conex = new Conexion();
+            query = "Select pendingValues From seller where idSeller = "+idSeller;
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);
+            rs.next();
+            double pendingValues = rs.getDouble("pendingValues");
+            if(pendingValues<deposit){
+                return false;
+            }
+            deposit = pendingValues - deposit;
+            conex = new Conexion();
+            query = "Update seller Set pendingValues = ? where idSeller = "+idSeller;
+            PreparedStatement pst = conex.getConexion().prepareStatement(query);
+            pst.setDouble(1,deposit);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e){
+            return false;            
+        }
+    
+    }
 
     
     

@@ -78,7 +78,7 @@ public class Service {
     }
 
     @POST
-    @Path("setSeller")
+    @Path("seller")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public boolean addSeller(Seller seller) {
@@ -179,7 +179,7 @@ public class Service {
     }
 
     @GET
-    @Path("comprar/{id}/{cantidad}")
+    @Path("buy/{id}/{cantidad}")
     @Produces(MediaType.APPLICATION_JSON)
     public String buy(@PathParam("id") int id, @PathParam("cantidad") int cantidad) {
         
@@ -192,12 +192,22 @@ public class Service {
             double total = price - discount;
             op.updatePendingValues((total*0.08), id);
             return "Subtotal: " + price
-                    + "\nDiscount: " + discount
+                    + "\nDescuento: " + discount
                     + "\nTotal: " + total+
                     "\nComision: "+(total*0.08);
         } else {
             return "No hay suficiente stock";
         }
     }
+    
+    @GET
+    @Path("pay/{id}/{deposit}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean setPay(@PathParam("id") int id, @PathParam("deposit") double deposit){
+        
+        return op.setPay(id, deposit);     
+    }
+    
+    
 
 }
