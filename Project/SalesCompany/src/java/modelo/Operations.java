@@ -77,8 +77,7 @@ public class Operations {
             pst.close();
             
         }catch(SQLException e){
-            System.out.println("" + e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se registro");
+            return false;
         }
         return true;
     }
