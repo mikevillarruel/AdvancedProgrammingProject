@@ -154,16 +154,5 @@ public class Seller {
     public void setPendingValues(double pendingValues) {
         this.pendingValues = pendingValues;
     }
-
-    @Override
-    public String toString() {
-        return "Seller{" + "idSeller=" + idSeller + ", userName=" + userName + 
-                ", password=" + password + ", name=" + name + 
-                ", lastName=" + lastName + ", address=" + address + 
-                ", telephone=" + telephone + ", email=" + email + 
-                ", pendingValues=" + pendingValues + '}';
-    }
-    
-    
-    
+        
 }

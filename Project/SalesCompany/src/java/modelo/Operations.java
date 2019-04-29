@@ -82,12 +82,11 @@ public class Operations {
         return true;
     }
 
-    public void insertSeller(Seller seller){
-         Connection cn;
-         conex = new Conexion();
-         cn=conex.getConexion();
+    public boolean insertSeller(Seller seller){
          try {
-            PreparedStatement orden = cn.prepareStatement("INSERT INTO seller(IDSELLER, USERNAME, PASSWORD, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?,?,?)");
+            conex = new Conexion();
+            String query = "INSERT INTO seller (IDSELLER, USERNAME, PASSWORD, NAME, LASTNAME, ADDRESS, TELEPHONE, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement orden = conex.getConexion().prepareStatement(query);
             orden.setInt(1, seller.getIdSeller());
             orden.setString(2, seller.getUserName());
             orden.setString(3, seller.getPassword());
@@ -96,13 +95,14 @@ public class Operations {
             orden.setString(6, seller.getAddress());
             orden.setString(7, seller.getTelephone());
             orden.setString(8, seller.getEmail());
-            orden.execute();            
+            orden.executeUpdate();
+            conex.desconectar();            
             orden.close();              
             
         } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se registro");
+            return false;
         }
+         return true;
     }
     
     public boolean deleteTicket(int idTicket) {
