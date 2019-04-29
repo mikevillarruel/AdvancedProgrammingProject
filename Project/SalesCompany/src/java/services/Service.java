@@ -152,7 +152,13 @@ public class Service {
     @Produces(MediaType.APPLICATION_JSON)
     public Seller updateSeller(@PathParam("id") int id, Seller seller){
         
-        
-        return null;
+        son gson = new Gson();
+        String json = gson.toJson(seller);
+        gson.toJsonTree(seller);
+        Seller seller1 = new Gson().fromJson(json, Seller.class);
+
+        seller1.setIdSeller(id);
+        op.updateSeller(seller1);
+        return op.selectSeller(id);
     }
 }

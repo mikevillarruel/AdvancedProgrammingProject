@@ -215,9 +215,26 @@ public class Operations {
         }           
     } 
     
-    public boolean update(int id){
-        
-        return true;
+    public boolean update(Seller seller){
+        try {
+            Seller sel = selectSeller(seller.getIdSeller());
+
+            conex = new Conexion();
+            String sql = "Update seller Set name=?, lastname=?, address=?, telephone=?, email=? Where idseller=? ";
+            PreparedStatement pst = conex.getConexion().prepareStatement(sql);
+            pst.setString(1, seller.getName());
+            pst.setString(2, seller.getLastName());
+            pst.setString(3, seller.getAddress());
+            pst.setString(4, seller.getTelephone());
+            pst.setString(5, seller.getTelephone());
+            pst.setInt(6, seller.getIdSeller());
+
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
 
