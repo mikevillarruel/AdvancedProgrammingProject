@@ -173,6 +173,7 @@ public class Operations {
     public double calculateCommission(int id) {
         double price = 0;
         int discount = 0;
+        double comission = 0.08;
         try {
             conex = new Conexion();
             query = "Select price,discount From ticket where idTicket=" + id;
@@ -186,7 +187,7 @@ public class Operations {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
 
         }
-        return (price - (price * discount / 100)) * 0.05;
+        return (price - (price * discount / 100)) * comission;
     }
 
     public boolean deleteSeller(int id) {

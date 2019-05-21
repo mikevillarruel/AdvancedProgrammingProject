@@ -1,7 +1,6 @@
 package services;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import java.util.Date;
 import java.util.Calendar;
 import javax.ws.rs.Consumes;
@@ -18,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import modelo.Operations;
 import modelo.Seller;
 import modelo.Ticket;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @Path("service")
 public class Service {
@@ -34,16 +35,22 @@ public class Service {
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean login(Seller seller) {
+    public Object login(Seller seller) {
+        JSONObject response = new JSONObject();
+
         try {
             Gson gson = new Gson();
             String json = gson.toJson(seller);
             gson.toJsonTree(seller);
             seller = new Gson().fromJson(json, Seller.class);
-            return op.login(seller);
-        } catch (JsonSyntaxException e) {
-            return false;
+            response.put("Execution", op.login(seller));
+        } catch (Exception e) {
+            try {
+                response.put("Execution", false);
+            } catch (JSONException ex) {
+            }
         }
+        return response.toString();
     }
 
     @GET
@@ -57,8 +64,10 @@ public class Service {
     @DELETE
     @Path("seller/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean deleteSeller(@PathParam("id") int id) {
-        return op.deleteSeller(id);
+    public Object deleteSeller(@PathParam("id") int id) throws JSONException {
+        JSONObject response = new JSONObject();
+        response.put("Execution", op.deleteSeller(id));
+        return response.toString();
     }
 
     @PUT
@@ -81,16 +90,23 @@ public class Service {
     @Path("seller")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean addSeller(Seller seller) {
+    public Object addSeller(Seller seller) {
+        JSONObject response = new JSONObject();
+
         try {
             Gson gson = new Gson();
             String json = gson.toJson(seller);
             gson.toJsonTree(seller);
             seller = new Gson().fromJson(json, Seller.class);
-            return op.insertSeller(seller);
-        } catch (JsonSyntaxException e) {
-            return false;
+            response.put("Execution", op.insertSeller(seller));
+        } catch (Exception e) {
+            try {
+                response.put("Execution", false);
+            } catch (JSONException ex) {
+            }
         }
+
+        return response.toString();
     }
 
     @GET
@@ -103,24 +119,34 @@ public class Service {
     @DELETE
     @Path("ticket/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteTicket(@PathParam("id") int id) {
-        return op.deleteTicket(id);
+    public Object deleteTicket(@PathParam("id") int id) {
+        JSONObject response = new JSONObject();
+        try {
+            response.put("Execution", op.deleteTicket(id));
+        } catch (JSONException ex) {
+        }
+        return response.toString();
     }
 
     @POST
     @Path("ticket")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean addTicket(Ticket ticket) {
+    public Object addTicket(Ticket ticket) {
+        JSONObject response = new JSONObject();
         try {
             Gson gson = new Gson();
             String json = gson.toJson(ticket);
             gson.toJsonTree(ticket);
             ticket = new Gson().fromJson(json, Ticket.class);
-            return op.insertTicket(ticket);
-        } catch (JsonSyntaxException e) {
-            return false;
+            response.put("Execution", op.insertTicket(ticket));
+        } catch (Exception e) {
+            try {
+                response.put("Execution", false);
+            } catch (JSONException ex) {
+            }
         }
+        return response.toString();
     }
 
     @GET
@@ -154,35 +180,61 @@ public class Service {
             fin = fin * (-1);
         }
 
-        if (months < 0) {
-            return "Su vuelo ya se paso de la fecha indicada" + date;
+        JSONObject response = new JSONObject();
 
+        if (months < 0) {
+            try {
+                response.put("FechaDeVuelo", "Expirada");
+                return response.toString();
+            } catch (JSONException ex) {
+                return null;
+            }
         } else {
-            return "La fecha de vuelo es :" + date + "\nLa fecha actual es: "
-                    + año + "-" + mes + "-" + dia + "\nFaltan: " + fin
-                    + " Dias para su vuelo";
+            try {
+                response.put("FechaDeVuelo", date);
+                response.put("FechaActual", año + "-" + mes + "-" + dia);
+                response.put("DiasFaltantes", fin);
+                return response.toString();
+            } catch (JSONException ex) {
+                return null;
+            }
         }
+
     }
 
     @GET
     @Path("calculateDiscount/{idTicket}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getDiscount(@PathParam("idTicket") int id) {
-        return "El descuento es de: " + "$" + op.calculateDiscount(id);
+    public Object getDiscount(@PathParam("idTicket") int id) {
+        JSONObject response = new JSONObject();
+        try {
+            response.put("Descuento", op.calculateDiscount(id));
+            return response.toString();
+        } catch (JSONException ex) {
+            return null;
+        }
     }
 
     @GET
     @Path("calculateCommission/{idTicket}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCommission(@PathParam("idTicket") int id) {
-        return "La comision es de: " + "$" + op.calculateCommission(id);
+    public Object getCommission(@PathParam("idTicket") int id) {
+        JSONObject response = new JSONObject();
+        try {
+            response.put("Comision", op.calculateCommission(id));
+            return response.toString();
+        } catch (JSONException ex) {
+            return null;
+        }
     }
 
     @GET
     @Path("buy/{id}/{cantidad}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String buy(@PathParam("id") int id, @PathParam("cantidad") int cantidad) {
-        
+    public Object buy(@PathParam("id") int id, @PathParam("cantidad") int cantidad) {
+
+        JSONObject response = new JSONObject();
+
         if (op.updateTicket(id, cantidad)) {
             Ticket ticket = op.selectTicket(id);
             double price = ticket.getPrice();
@@ -190,24 +242,34 @@ public class Service {
             price = price * cantidad;
             discount = (price * (discount / 100));
             double total = price - discount;
-            op.updatePendingValues((total*0.08), id);
-            return "Subtotal: " + price
-                    + "\nDescuento: " + discount
-                    + "\nTotal: " + total+
-                    "\nComision: "+(total*0.08);
+            op.updatePendingValues((total * 0.08), id);
+
+            try {
+                response.put("Subtotal", price);
+                response.put("Descuento", discount);
+                response.put("Total", total);
+                response.put("Comision", op.calculateCommission(id) * cantidad);
+            } catch (JSONException ex) {
+            }
+
         } else {
-            return "No hay suficiente stock";
+
+            try {
+                response.put("Stock", op.selectTicket(id).getStock());
+            } catch (JSONException ex) {
+            }
+
         }
+        //System.out.println(obj);
+        return response.toString();
     }
-    
+
     @GET
     @Path("pay/{id}/{deposit}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean setPay(@PathParam("id") int id, @PathParam("deposit") double deposit){
-        
-        return op.setPay(id, deposit);     
+    public Object setPay(@PathParam("id") int id, @PathParam("deposit") double deposit) throws JSONException {
+        JSONObject response = new JSONObject();
+        response.put("Execution", op.setPay(id, deposit));
+        return response.toString();
     }
-    
-    
-
 }
