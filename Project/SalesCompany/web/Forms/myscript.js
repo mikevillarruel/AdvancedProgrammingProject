@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-    
+
     $("#dateForm").submit(function () {
 
         var search = $("#idTicket").val();
@@ -158,7 +158,6 @@ $(document).ready(function () {
                 stock.appendTo('#result');
             }
         });
-
         return false;
     });
 
@@ -171,24 +170,29 @@ $(document).ready(function () {
             clas: $("#clas").val(),
             date: $("#date").val(),
             departure: $("#departure").val(),
-            discount: $("#discount").val(),
+            discount: parseInt($("#discount").val()),
             flightNumber: $("#flightNumber").val(),
             gate: $("#gate").val(),
-            idSeller: $("#idSeller").val(),
-            idTicket: $("#idTicket").val(),
-            price: $("#price").val(),
+            idSeller: parseInt($("#idSeller").val()),
+            idTicket: parseInt($("#idTicket").val()),
+            price: parseFloat($("#price").val()),
             seat: $("#seat").val(),
-            stock: $("#stock").val()
+            stock: parseInt($("#stock").val())
         };
-        //alert(JSON.stringify(data));
+        
+        alert(JSON.stringify(data));
         $.ajax({
             url: "http://localhost:8080/SalesCompany/sales/service/ticket",
             dataType: "json",
             type: "post",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function () {
-                alert("Registro Correcto");
+            success: function (response) {
+                if (response.Execution == true) {
+                    alert("Registro Correcto");
+                } else {
+                    alert("Registro Incorrecto");
+                }
             },
             error: function () {
                 alert("Error");
@@ -254,7 +258,7 @@ $(document).ready(function () {
 
     $("#deleteSellerForm").submit(function () {
 
-        var eliminate = $("#idTicket").val();
+        var eliminate = $("#idSeller").val();
         $.ajax({
             url: "http://localhost:8080/SalesCompany/sales/service/seller/" + eliminate,
             dataType: "json",
@@ -396,7 +400,7 @@ $(document).ready(function () {
     $("#payForm").submit(function () {
 
         var idSeller = $("#idSeller").val();
-        var payment = $("#payment").val();
+        var payment = parseFloat($("#payment").val());
         $("#result").empty();
 
         $.ajax({

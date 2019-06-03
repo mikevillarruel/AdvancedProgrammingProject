@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist\css\bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap-4.3.1-dist\js\bootstrap.min.js"></script>
+        <title>Register Ticket</title>
+    </head>
+    <body class="bg-light">
+        <div class="container" style="max-width:480px">
+            <div class="py-5 text-center">
+                <h2>Register Ticket</h2>
+            </div>
+            <div>
+                <form id="insertTicketForm" class="needs-validation" novalidate>
+
+                     <div class="mb-3">
+                        <input type="number" class="form-control" id="idSeller" placeholder="Id Seller" required>
+                        <div class="invalid-feedback">
+                            Valid id is required.
+                        </div>
+                    </div>
+                    
+                     <div class="mb-3">
+                        <input type="number" class="form-control" id="idTicket" placeholder="Id Ticket" required>
+                        <div class="invalid-feedback">
+                            Valid id is required.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="price" placeholder="Price" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid price.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="departure" placeholder="Departure" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid departure.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="arrival" placeholder="Arrival" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid arrival.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="clas" placeholder="Class" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid class.
+                        </div>
+                    </div>
+
+                    <div class="element-date" title="date">
+                        <input class="form-control" data-format="yyyy-mm-dd" id="date" type="date" name="date" placeholder="Date">
+                        <label class="title"></label>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="hour" placeholder="Hour 00:00" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid hour.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="airline" placeholder="Airline" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid airline.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="gate" placeholder="Gate" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid gate.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="flightNumber" placeholder="Flight Number" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid flight number.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="seat" placeholder="Seat" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid seat.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="stock" placeholder="Stock" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid stock.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="discount" placeholder="Discount" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid discount.
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-success btn-lg btn-block" id="continue">SUBMIT</button>
+
+                </form>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script src="myscript.js"></script>
+
+
+
+    </body>
+</html>

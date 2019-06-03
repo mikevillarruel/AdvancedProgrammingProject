@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
 <head>
     <link rel="stylesheet" href="bootstrap-4.3.1-dist\css\bootstrap.min.css">
     <script type="text/javascript" src="bootstrap-4.3.1-dist\js\bootstrap.min.js"></script>
-    <title>Date Form</title>
+    <title>Buy Ticket</title>
 </head>
 
-<body class="bg-light">
-    <div class="container" style="max-width: 480px">
+<body class="bg-light" >
+    <div class="container" style="max-width:480px">
         <div class="py-5 text-center">
-            <h2>Date Form</h2>
+            <h2>Buy Ticket</h2>
         </div>
 
         <div>
-            <form id="dateForm" class="needs-validation">
+            <form id="buyForm" class="needs-validation">
                 <div>
                     <label for="idTicket">ID Ticket</label>
                     <input type="number" class="form-control" id="idTicket" required>
@@ -26,8 +19,16 @@ and open the template in the editor.
                         Valid id is required.
                     </div>
                 </div>
+                
+                <div>
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" required>
+                    <div class="invalid-feedback">
+                        Valid quantity is required.
+                    </div>
+                </div>
 
-                <button type="submit" class="btn btn-success btn-lg btn-block" id="continue">Continue</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" id="continue">SUBMIT</button>
 
                 <div id="result">
                 </div>
