@@ -1,0 +1,34 @@
+<head>
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist\css\bootstrap.min.css">
+    <script type="text/javascript" src="bootstrap-4.3.1-dist\js\bootstrap.min.js"></script>
+    <title>Search Seller</title>
+</head>
+
+<body class="bg-light" >
+    <div class="container" style="max-width:480px">
+        <div class="py-5 text-center">
+            <h2>Search Seller</h2>
+        </div>
+        <div>
+            <form id="selectTicketForm" class="needs-validation">
+                <div>
+                    <label for="idTicket">ID Ticket</label>
+                    <input type="number" class="form-control" id="idTicket" required>
+                    <div class="invalid-feedback">
+                        Valid id is required.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg btn-block" id="continue">SUBMIT</button>
+
+                <div id="result">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="myscript.js"></script>
+</body>
+
+</html>
