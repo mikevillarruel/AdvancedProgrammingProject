@@ -83,7 +83,7 @@ public class Service {
 
         seller1.setIdSeller(id);
         op.updateSeller(seller1);
-        return seller1;
+        return op.selectSeller(id);
     }
 
     @POST
@@ -192,7 +192,15 @@ public class Service {
         } else {
             try {
                 response.put("FechaDeVuelo", date);
-                response.put("FechaActual", año + "-" + mes + "-" + dia);
+                if (mes < 9 && dia < 9) {
+                    response.put("FechaActual", año + "-0" + mes + "-0" + dia);
+                } else if (mes < 9) {
+                    response.put("FechaActual", año + "-0" + mes + "-" + dia);
+                } else if (dia < 9) {
+                    response.put("FechaActual", año + "-" + mes + "-0" + dia);
+                } else {
+                    response.put("FechaActual", año + "-" + mes + "-" + dia);
+                }
                 response.put("DiasFaltantes", fin);
                 return response.toString();
             } catch (JSONException ex) {
@@ -260,7 +268,7 @@ public class Service {
             }
 
         }
-        
+
         return response.toString();
     }
 

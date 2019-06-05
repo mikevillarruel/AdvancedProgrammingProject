@@ -1,3 +1,4 @@
+<html>
 <head>
     <link rel="stylesheet" href="bootstrap-4.3.1-dist\css\bootstrap.min.css">
     <script type="text/javascript" src="bootstrap-4.3.1-dist\js\bootstrap.min.js"></script>
@@ -14,7 +15,7 @@
             <form id="buyForm" class="needs-validation">
                 <div>
                     <label for="idTicket">ID Ticket</label>
-                    <input type="number" class="form-control" id="idTicket" required>
+                    <input type="number" class="form-control" id="idTicket" min="1" required>
                     <div class="invalid-feedback">
                         Valid id is required.
                     </div>
@@ -22,7 +23,7 @@
                 
                 <div>
                     <label for="quantity">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" required>
+                    <input type="number" class="form-control" id="quantity" min="1" required>
                     <div class="invalid-feedback">
                         Valid quantity is required.
                     </div>

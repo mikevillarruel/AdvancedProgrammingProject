@@ -232,7 +232,7 @@ $(document).ready(function () {
             type: "get",
             success: function (response) {
 
-                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value=' + response.address + '></div>');
+                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value="' + response.address + '"></div>');
                 email = $('<br><div><label for="email">Email</label><input class="form-control" id="email" value=' + response.email + '></div>');
                 idSeller = $('<br><div><label for="idSeller">Id Seller</label><input class="form-control" id="idSeller" value=' + response.idSeller + '></div>');
                 lastName = $('<br><div><label for="lastName">Last Name</label><input class="form-control" id="lastName" value=' + response.lastName + '></div>');
@@ -277,7 +277,7 @@ $(document).ready(function () {
 
     $("#updateSellerForm").submit(function () {
 
-        var search = $("#idTicket").val();
+        var search = $("#idSeller").val();
         var data = {
             address: $("#address").val(),
             email: $("#email").val(),
@@ -286,7 +286,7 @@ $(document).ready(function () {
             telephone: $("#telephone").val(),
             userName: $("#userName").val()
         };
-        //alert(JSON.stringify(data));
+        
         $.ajax({
             url: "http://localhost:8080/SalesCompany/sales/service/seller/" + search,
             dataType: "json",
