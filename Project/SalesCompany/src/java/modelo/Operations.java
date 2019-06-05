@@ -251,7 +251,7 @@ public class Operations {
         }
     }
     
-    public boolean updateTicket(int id, int cantidad) {
+    public boolean buyTicket(int id, int cantidad) {
         try {
             
             conex = new Conexion();
