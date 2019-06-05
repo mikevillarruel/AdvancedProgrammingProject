@@ -275,7 +275,7 @@ $(document).ready(function () {
     });
 
 
-    $("#insertSellerForm").submit(function () {
+    $("#updateSellerForm").submit(function () {
 
         var search = $("#idTicket").val();
         var data = {
