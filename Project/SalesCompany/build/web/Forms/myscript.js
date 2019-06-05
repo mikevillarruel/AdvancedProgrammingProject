@@ -232,7 +232,7 @@ $(document).ready(function () {
             type: "get",
             success: function (response) {
 
-                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value=' + response.address + '></div>');
+                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value="' + response.address + '"></div>');
                 email = $('<br><div><label for="email">Email</label><input class="form-control" id="email" value=' + response.email + '></div>');
                 idSeller = $('<br><div><label for="idSeller">Id Seller</label><input class="form-control" id="idSeller" value=' + response.idSeller + '></div>');
                 lastName = $('<br><div><label for="lastName">Last Name</label><input class="form-control" id="lastName" value=' + response.lastName + '></div>');
