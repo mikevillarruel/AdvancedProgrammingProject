@@ -243,7 +243,7 @@ public class Service {
 
         JSONObject response = new JSONObject();
 
-        if (op.updateTicket(id, cantidad)) {
+        if (op.buyTicket(id, cantidad)) {
             Ticket ticket = op.selectTicket(id);
             double price = ticket.getPrice();
             double discount = (double) ticket.getDiscount();
