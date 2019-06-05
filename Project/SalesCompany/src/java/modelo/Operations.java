@@ -173,7 +173,7 @@ public class Operations {
     public double calculateCommission(int id) {
         double price = 0;
         int discount = 0;
-        double comission = 0.08;
+        double comission = 0.1;
         try {
             conex = new Conexion();
             query = "Select price,discount From ticket where idTicket=" + id;

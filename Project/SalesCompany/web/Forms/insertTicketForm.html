@@ -11,45 +11,45 @@
                 <h2>Register Ticket</h2>
             </div>
             <div>
-                <form id="insertTicketForm" class="needs-validation" novalidate>
+                <form id="insertTicketForm" class="needs-validation">
 
                      <div class="mb-3">
-                        <input type="number" class="form-control" id="idSeller" placeholder="Id Seller" required>
+                        <input type="number" class="form-control" id="idSeller" placeholder="Id Seller" min="1" required>
                         <div class="invalid-feedback">
                             Valid id is required.
                         </div>
                     </div>
                     
                      <div class="mb-3">
-                        <input type="number" class="form-control" id="idTicket" placeholder="Id Ticket" required>
+                        <input type="number" class="form-control" id="idTicket" placeholder="Id Ticket" min="1" required>
                         <div class="invalid-feedback">
                             Valid id is required.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="price" placeholder="Price" required>
+                        <input type="number" step="0.01" class="form-control" id="price" placeholder="Price" min="1" required>
                         <div class="invalid-feedback">
                             Please enter a valid price.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="departure" placeholder="Departure" required>
+                        <input type="text" pattern="[A-Z][A-Za-z]{1,32}" class="form-control" id="departure" placeholder="Departure" required>
                         <div class="invalid-feedback">
                             Please enter a valid departure.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="arrival" placeholder="Arrival" required>
+                        <input type="text" pattern="[A-Z][A-Za-z]{1,32}" class="form-control" id="arrival" placeholder="Arrival" required>
                         <div class="invalid-feedback">
                             Please enter a valid arrival.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="clas" placeholder="Class" required>
+                        <input type="text" pattern="[A-Z][A-Za-z]{1,32}" class="form-control" id="clas" placeholder="Class" required>
                         <div class="invalid-feedback">
                             Please enter a valid class.
                         </div>
@@ -61,49 +61,49 @@
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="hour" placeholder="Hour 00:00" required>
+                        <input type="text" pattern="[0-1][0-9][:][0-5][0-9]|[2][0-3][:][0-5][0-9]" class="form-control" id="hour" placeholder="Hour 00:00" required>
                         <div class="invalid-feedback">
                             Please enter a valid hour.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="airline" placeholder="Airline" required>
+                        <input type="text" pattern="[A-Z][A-Za-z]{1,32}" class="form-control" id="airline" placeholder="Airline" required>
                         <div class="invalid-feedback">
                             Please enter a valid airline.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="gate" placeholder="Gate" required>
+                        <input type="text" pattern="[A-Z][0-9]{1,4}" class="form-control" id="gate" placeholder="Gate" required>
                         <div class="invalid-feedback">
                             Please enter a valid gate.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="flightNumber" placeholder="Flight Number" required>
+                        <input type="text" pattern="[A-Z][0-9]{1,4}" class="form-control" id="flightNumber" placeholder="Flight Number" required>
                         <div class="invalid-feedback">
                             Please enter a valid flight number.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="seat" placeholder="Seat" required>
+                        <input type="text" pattern="[A-Z][0-9]{1,4}" class="form-control" id="seat" placeholder="Seat" required>
                         <div class="invalid-feedback">
                             Please enter a valid seat.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="number" class="form-control" id="stock" placeholder="Stock" required>
+                        <input type="number" class="form-control" id="stock" placeholder="Stock" min="1" required>
                         <div class="invalid-feedback">
                             Please enter a valid stock.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="number" class="form-control" id="discount" placeholder="Discount" required>
+                        <input type="number" class="form-control" id="discount" placeholder="Discount" min="0" required>
                         <div class="invalid-feedback">
                             Please enter a valid discount.
                         </div>

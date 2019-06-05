@@ -14,7 +14,7 @@
             <form id="payForm" class="needs-validation">
                 <div>
                     <label for="idSeller">ID Seller</label>
-                    <input type="number" class="form-control" id="idSeller" required>
+                    <input type="number" class="form-control" id="idSeller" min="1" required>
                     <div class="invalid-feedback">
                         Valid id is required.
                     </div>
@@ -22,7 +22,7 @@
                 
                 <div>
                     <label for="payment">Payment</label>
-                    <input type="text" class="form-control" id="payment" required>
+                    <input type="number" step="0.01" class="form-control" id="payment" min="0.01" required>
                     <div class="invalid-feedback">
                         Valid payment is required.
                     </div>

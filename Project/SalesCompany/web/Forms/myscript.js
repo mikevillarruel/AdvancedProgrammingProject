@@ -277,7 +277,7 @@ $(document).ready(function () {
 
     $("#updateSellerForm").submit(function () {
 
-        var search = $("#idTicket").val();
+        var search = $("#idSeller").val();
         var data = {
             address: $("#address").val(),
             email: $("#email").val(),
@@ -286,7 +286,7 @@ $(document).ready(function () {
             telephone: $("#telephone").val(),
             userName: $("#userName").val()
         };
-        //alert(JSON.stringify(data));
+        
         $.ajax({
             url: "http://localhost:8080/SalesCompany/sales/service/seller/" + search,
             dataType: "json",
