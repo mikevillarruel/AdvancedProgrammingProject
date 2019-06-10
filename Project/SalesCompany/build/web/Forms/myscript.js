@@ -6,18 +6,21 @@
 
 $(document).ready(function () {
 
+    var ip = "192.168.0.105";
+
     $("#dateForm").submit(function () {
 
         var search = $("#idTicket").val();
         $("#result").empty();
+
         if (search == '') {
 
             alert("Please enter something in the field first");
 
         } else {
-            /*Ejecuta la consulta y activa la funcion que tiene como parametro la respuesta de dicha consulta*/
+
             $.ajax({
-                url: "http://localhost:8080/SalesCompany/sales/service/calculateDate/" + search,
+                url: "http://" + ip + ":8080/SalesCompany/sales/service/calculateDate/" + search,
                 dataType: "json",
                 type: "get",
                 success: function (response) {
@@ -54,7 +57,7 @@ $(document).ready(function () {
         };
         //alert(JSON.stringify(data));
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/seller",
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/seller",
             dataType: "json",
             type: "post",
             contentType: "application/json",
@@ -76,7 +79,7 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/calculateCommission/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/calculateCommission/" + search,
             dataType: "json",
             type: "GET",
             success: function (response) {
@@ -99,7 +102,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/login",
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/login",
             dataType: "json",
             type: "post",
             contentType: "application/json",
@@ -124,7 +127,7 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/ticket/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/ticket/" + search,
             dataType: "json",
             type: "get",
             success: function (response) {
@@ -179,10 +182,10 @@ $(document).ready(function () {
             seat: $("#seat").val(),
             stock: parseInt($("#stock").val())
         };
-        
+
         alert(JSON.stringify(data));
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/ticket",
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/ticket",
             dataType: "json",
             type: "post",
             contentType: "application/json",
@@ -206,7 +209,7 @@ $(document).ready(function () {
 
         var eliminate = $("#idTicket").val();
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/ticket/" + eliminate,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/ticket/" + eliminate,
             dataType: "json",
             type: "delete",
             success: function () {
@@ -227,7 +230,7 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/seller/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/seller/" + search,
             dataType: "json",
             type: "get",
             success: function (response) {
@@ -260,7 +263,7 @@ $(document).ready(function () {
 
         var eliminate = $("#idSeller").val();
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/seller/" + eliminate,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/seller/" + eliminate,
             dataType: "json",
             type: "delete",
             success: function () {
@@ -286,9 +289,9 @@ $(document).ready(function () {
             telephone: $("#telephone").val(),
             userName: $("#userName").val()
         };
-        
+
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/seller/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/seller/" + search,
             dataType: "json",
             type: "put",
             contentType: "application/json",
@@ -310,7 +313,7 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/calculateDiscount/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/calculateDiscount/" + search,
             dataType: "json",
             type: "GET",
             success: function (response) {
@@ -331,12 +334,12 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/sellerTicket/" + search,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/sellerTicket/" + search,
             dataType: "json",
             type: "get",
             success: function (response) {
 
-                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value=' + response.address + '></div>');
+                address = $('<br><div><label for="address">Address</label><input class="form-control" id="address" value="' + response.address + '"></div>');
                 email = $('<br><div><label for="email">Email</label><input class="form-control" id="email" value=' + response.email + '></div>');
                 idSeller = $('<br><div><label for="idSeller">Id Seller</label><input class="form-control" id="idSeller" value=' + response.idSeller + '></div>');
                 lastName = $('<br><div><label for="lastName">Last Name</label><input class="form-control" id="lastName" value=' + response.lastName + '></div>');
@@ -367,21 +370,22 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/buy/" + idTicket + "/" + quantity,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/buy/" + idTicket + "/" + quantity,
             dataType: "json",
             type: "GET",
             success: function (response) {
                 var totalAux = response.Total;
                 if (totalAux != null) {
-                    total = $('<br><div><label for="total">Total</label><input class="form-control" id="total" value=' + response.Total + '></div>');
                     subtotal = $('<br><div><label for="subtotal">Subtotal</label><input class="form-control" id="subtotal" value=' + response.Subtotal + '></div>');
                     discount = $('<br><div><label for="discount">Discount</label><input class="form-control" id="discount" value=' + response.Descuento + '></div>');
+                    total = $('<br><div><label for="total">Total</label><input class="form-control" id="total" value=' + response.Total + '></div>');                    
                     comission = $('<br><div><label for="comission">Comission</label><input class="form-control" id="comission" value=' + response.Comision + '></div>');
-
-                    total.appendTo('#result');
+                    
                     subtotal.appendTo('#result');
                     discount.appendTo('#result');
+                    total.appendTo('#result');
                     comission.appendTo('#result');
+                    
                 } else {
                     stock = $('<br><div><label for="stock">Stock</label><input class="form-control" id="stock" value=' + response.Stock + '></div>');
                     stock.appendTo('#result');
@@ -404,7 +408,7 @@ $(document).ready(function () {
         $("#result").empty();
 
         $.ajax({
-            url: "http://localhost:8080/SalesCompany/sales/service/pay/" + idSeller + "/" + payment,
+            url: "http://" + ip + ":8080/SalesCompany/sales/service/pay/" + idSeller + "/" + payment,
             dataType: "json",
             type: "GET",
             success: function (response) {

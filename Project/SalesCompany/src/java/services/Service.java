@@ -1,6 +1,8 @@
 package services;
 
 import com.google.gson.Gson;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.Calendar;
 import javax.ws.rs.Consumes;
@@ -244,19 +246,24 @@ public class Service {
         JSONObject response = new JSONObject();
 
         if (op.buyTicket(id, cantidad)) {
+            DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+            separadoresPersonalizados.setDecimalSeparator('.');
+            DecimalFormat df = new DecimalFormat("#.00", separadoresPersonalizados);
             Ticket ticket = op.selectTicket(id);
             double price = ticket.getPrice();
             double discount = (double) ticket.getDiscount();
             price = price * cantidad;
             discount = (price * (discount / 100));
             double total = price - discount;
-            op.updatePendingValues((total * 0.08), id);
+            double totalComission = op.calculateCommission(id)*cantidad;
+            totalComission = Double.parseDouble(df.format(totalComission));
+            op.updatePendingValues(totalComission,id);
 
             try {
                 response.put("Subtotal", price);
-                response.put("Descuento", discount);
+                response.put("Descuento", Double.parseDouble(df.format(discount)));
                 response.put("Total", total);
-                response.put("Comision", op.calculateCommission(id) * cantidad);
+                response.put("Comision", totalComission);
             } catch (JSONException ex) {
             }
 

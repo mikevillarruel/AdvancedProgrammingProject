@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class Operations {
 
@@ -154,6 +156,9 @@ public class Operations {
     public double calculateDiscount(int id) {
         double price = 0;
         int discount = 0;
+        DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#.00",separadoresPersonalizados);
         try {
             conex = new Conexion();
             query = "Select price,discount From ticket where idTicket=" + id;
@@ -167,13 +172,16 @@ public class Operations {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
 
         }
-        return (price * discount / 100);
+        return Double.parseDouble(df.format((price * discount / 100)));
     }
 
     public double calculateCommission(int id) {
         double price = 0;
         int discount = 0;
         double comission = 0.1;
+        DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#.00",separadoresPersonalizados);
         try {
             conex = new Conexion();
             query = "Select price,discount From ticket where idTicket=" + id;
@@ -187,7 +195,7 @@ public class Operations {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
 
         }
-        return (price - (price * discount / 100)) * comission;
+        return Double.parseDouble(df.format((price - (price * discount / 100)) * comission));
     }
 
     public boolean deleteSeller(int id) {
@@ -284,7 +292,10 @@ public class Operations {
             rs = pst.executeQuery(query);
             rs.next();
             pendingValues = rs.getDouble("pendingValues") + pendingValues;
-            
+            DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+            separadoresPersonalizados.setDecimalSeparator('.');
+            DecimalFormat df = new DecimalFormat("#.00", separadoresPersonalizados);
+            pendingValues=Double.parseDouble(df.format(pendingValues));
             
             conex = new Conexion();
             query = "Update seller Set pendingValues = ? where idSeller = (select idSeller from ticket where idTicket = "+idTicket+")";
