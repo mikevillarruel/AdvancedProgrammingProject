@@ -14,7 +14,7 @@ public class Ticket {
     private String arrival;
     private String clas;
     private Date date;
-    private Time hour;
+    private String hour;
     private String airline;
     private String gate;
     private String flightNumber;
@@ -25,7 +25,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int idTicket, int idSeller, double price, String departure, String arrival, String clas, Date date, Time hour, String airline, String gate, String flightNumber, String seat, int stock, int discount) {
+    public Ticket(int idTicket, int idSeller, double price, String departure, String arrival, String clas, Date date, String hour, String airline, String gate, String flightNumber, String seat, int stock, int discount) {
         this.idTicket = idTicket;
         this.idSeller = idSeller;
         this.price = price;
@@ -147,14 +147,14 @@ public class Ticket {
     /**
      * @return the hour
      */
-    public Time getHour() {
+    public String getHour() {
         return hour;
     }
 
     /**
      * @param hour the hour to set
      */
-    public void setHour(Time hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

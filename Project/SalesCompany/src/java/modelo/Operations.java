@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 
 public class Operations {
 
@@ -32,6 +33,28 @@ public class Operations {
         }
         return seller;
     }
+    
+    public ArrayList<Seller> selectSellers(){
+        ArrayList<Seller> arraySellers = new ArrayList<Seller>();
+        
+        try{
+            conex = new Conexion();
+            query="Select * from seller";
+            pst = conex.getConexion().prepareStatement(query);
+            rs=pst.executeQuery(query);
+            Seller seller = new Seller();
+            while(rs.next()){
+                seller = new Seller(rs.getInt("idSeller"), rs.getString("userName"), null, rs.getString("name"), rs.getString("lastName"), rs.getString("address"), rs.getString("telephone"), rs.getString("email"), rs.getDouble("pendingValues"));
+                arraySellers.add(seller);
+            }
+            conex.desconectar();
+            rs.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+        
+        }
+        return arraySellers;
+    }
 
     public Ticket selectTicket(int id) {
         Ticket ticket = new Ticket();
@@ -41,7 +64,7 @@ public class Operations {
             pst = conex.getConexion().prepareStatement(query);
             rs = pst.executeQuery(query);
             while (rs.next()) {
-                ticket = new Ticket(rs.getInt("idTicket"), rs.getInt("idSeller"), rs.getDouble("price"), rs.getString("departure"), rs.getString("arrival"), rs.getString("class"), rs.getDate("date"), rs.getTime("hour"), rs.getString("airline"), rs.getString("gate"), rs.getString("flightNumber"), rs.getString("seat"), rs.getInt("stock"), rs.getInt("discount"));
+                ticket = new Ticket(rs.getInt("idTicket"), rs.getInt("idSeller"), rs.getDouble("price"), rs.getString("departure"), rs.getString("arrival"), rs.getString("class"), rs.getDate("date"), rs.getString("hour"), rs.getString("airline"), rs.getString("gate"), rs.getString("flightNumber"), rs.getString("seat"), rs.getInt("stock"), rs.getInt("discount"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
@@ -49,6 +72,28 @@ public class Operations {
         }
 
         return ticket;
+    }
+    
+    public ArrayList<Ticket> selectTickets(){
+        ArrayList<Ticket> arrayTickets = new ArrayList<Ticket>();
+        
+        try{
+            conex = new Conexion();
+            query="Select * from ticket";
+            pst = conex.getConexion().prepareStatement(query);
+            rs=pst.executeQuery(query);
+            Ticket ticket = new Ticket();
+            while(rs.next()){
+                ticket = new Ticket(rs.getInt("idTicket"), rs.getInt("idSeller"), rs.getDouble("price"), rs.getString("departure"), rs.getString("arrival"), rs.getString("class"), rs.getDate("date"), rs.getString("hour"), rs.getString("airline"), rs.getString("gate"), rs.getString("flightNumber"), rs.getString("seat"), rs.getInt("stock"), rs.getInt("discount"));
+                arrayTickets.add(ticket);
+            }
+            conex.desconectar();
+            rs.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo obtener datos");
+        
+        }
+        return arrayTickets;
     }
 
     public boolean insertTicket(Ticket ticket) {
@@ -63,7 +108,7 @@ public class Operations {
             pst.setString(5, ticket.getArrival());
             pst.setString(6, ticket.getClas());
             pst.setDate(7, ticket.getDate());
-            pst.setTime(8, ticket.getHour());
+            pst.setString(8, ticket.getHour());
             pst.setString(9, ticket.getAirline());
             pst.setString(10, ticket.getGate());
             pst.setString(11, ticket.getFlightNumber());

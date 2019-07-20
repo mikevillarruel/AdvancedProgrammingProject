@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
 
-    var ip = "192.168.0.105";
+    var ip = "192.168.0.113";
 
     $("#dateForm").submit(function () {
 

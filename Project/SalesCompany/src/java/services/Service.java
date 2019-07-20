@@ -3,6 +3,7 @@ package services;
 import com.google.gson.Gson;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import javax.ws.rs.Consumes;
@@ -62,6 +63,14 @@ public class Service {
         Seller seller = op.selectSeller(id);
         return seller;
     }
+    
+    @GET
+    @Path("sellers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Seller> setSellers() {
+        ArrayList<Seller> arraySellers = op.selectSellers();
+        return arraySellers;         
+    } 
 
     @DELETE
     @Path("seller/{id}")
@@ -117,6 +126,14 @@ public class Service {
     public Ticket getticket(@PathParam("id") int id) {
         return op.selectTicket(id);
     }
+    
+    @GET
+    @Path("tickets")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Ticket> getTickets() {
+        ArrayList<Ticket> arrayTickets = op.selectTickets();
+        return arrayTickets;         
+    }    
 
     @DELETE
     @Path("ticket/{id}")
