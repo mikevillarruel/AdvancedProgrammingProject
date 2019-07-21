@@ -47,6 +47,7 @@ public class Service {
             gson.toJsonTree(seller);
             seller = new Gson().fromJson(json, Seller.class);
             response.put("Execution", op.login(seller));
+            response.put("idSeller", op.getIdSeller(seller));
         } catch (Exception e) {
             try {
                 response.put("Execution", false);

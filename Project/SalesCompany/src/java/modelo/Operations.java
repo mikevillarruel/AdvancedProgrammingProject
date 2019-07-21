@@ -304,6 +304,21 @@ public class Operations {
         }
     }
     
+    public int getIdSeller(Seller seller) {
+
+        try {
+            conex = new Conexion();
+            query = "Select idSeller From seller where userName = '"+seller.getUserName()+"'";
+            pst = conex.getConexion().prepareStatement(query);
+            rs = pst.executeQuery(query);
+            rs.next();
+            return rs.getInt("idSeller");
+
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+    
     public boolean buyTicket(int id, int cantidad) {
         try {
             
