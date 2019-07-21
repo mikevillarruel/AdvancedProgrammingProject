@@ -2,7 +2,6 @@ package com.example.salescompany;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,6 +20,7 @@ import java.net.URL;
 public class deleteSeller extends AppCompatActivity {
 
     Button delete;
+    singleToneClass singleToneClass = com.example.salescompany.singleToneClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class deleteSeller extends AppCompatActivity {
         EditText id;
         id = (EditText) findViewById(R.id.id);
 
-        String sql = "http://192.168.0.107:8080/SalesCompany/sales/service/seller/"+id.getText();
+        String sql = "http://"+singleToneClass.getIP()+":8080/SalesCompany/sales/service/seller/"+id.getText();
         URL url = null;
         HttpURLConnection conn;
 

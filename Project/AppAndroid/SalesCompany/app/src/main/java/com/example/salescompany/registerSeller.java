@@ -2,7 +2,6 @@ package com.example.salescompany;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -23,6 +22,7 @@ public class registerSeller extends AppCompatActivity {
 
     EditText idSeller, name, lastName, telephone, email, address, userName, password;
     Button registerSeller;
+    singleToneClass singleToneClass = com.example.salescompany.singleToneClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class registerSeller extends AppCompatActivity {
         registerSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                executeUpdate();
+                executeRegister();
             }
         });
     }
@@ -50,7 +50,7 @@ public class registerSeller extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
-        String sql = "http://www.goairways.be:8080/SalesCompany/sales/service/seller";
+        String sql = "http://"+singleToneClass.getIP()+"/SalesCompany/sales/service/seller";
 
         URL url = null;
         HttpURLConnection conn;
@@ -120,7 +120,7 @@ public class registerSeller extends AppCompatActivity {
         telephone = (EditText) findViewById(R.id.userName);
         email = (EditText) findViewById(R.id.telephone);
 
-        String sql = "http://192.168.0.107:8080/SalesCompany/sales/service/seller/1";
+        String sql = "http://"+singleToneClass.getIP()+"/SalesCompany/sales/service/seller/1";
 
         URL url = null;
         HttpURLConnection conn;

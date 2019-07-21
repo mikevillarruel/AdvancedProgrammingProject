@@ -11,23 +11,31 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText userName, password;
     Button register, btnLogin, btn;
+    String ip = "192.168.0.104:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        singleToneClass singleToneClass = com.example.salescompany.singleToneClass.getInstance();
+        singleToneClass.setIP(ip);
 
         register = (Button) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
@@ -42,14 +50,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 executeLogin();
-            }
-        });
-
-        btn = (Button) findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteSeller();
             }
         });
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         userName = (EditText) findViewById(R.id.userName);
         password = (EditText) findViewById(R.id.password);
-        String sql = "http://192.168.0.107:8080/SalesCompany/sales/service/login";
+        String sql = "http://"+ip+"/SalesCompany/sales/service/login";
 
         URL url = null;
         HttpURLConnection conn;
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (jsonObject.optString("Execution").equals("true")) {
                 Intent i = new Intent(this, startMenu.class);
+                //this.finish();
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "User or Password Incorrect :(", Toast.LENGTH_SHORT).show();
