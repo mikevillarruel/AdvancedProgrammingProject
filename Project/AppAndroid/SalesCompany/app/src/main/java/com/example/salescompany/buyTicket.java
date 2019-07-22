@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class buyTicket extends AppCompatActivity {
 
         buy = (Button) findViewById(R.id.buyTicket);
         quantity = (EditText) findViewById(R.id.quantity);
-        details = (TextView) findViewById(R.id.details);
+        details = (TextView) findViewById(R.id.detailsProfile);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override

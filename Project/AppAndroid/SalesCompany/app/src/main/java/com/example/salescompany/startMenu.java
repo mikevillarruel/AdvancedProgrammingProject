@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class startMenu extends AppCompatActivity {
 
-    Button btnLogOut, buy;
+    Button btnLogOut, buy, myProfile, sale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +24,43 @@ public class startMenu extends AppCompatActivity {
             }
         });
 
-        btnLogOut = (Button) findViewById(R.id.buy);
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        buy = (Button) findViewById(R.id.buy);
+        buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buy();
             }
         });
+
+        myProfile = (Button) findViewById(R.id.myProfile);
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile();
+            }
+        });
+
+        sale = (Button) findViewById(R.id.sale);
+        sale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sale();
+            }
+        });
+    }
+
+    public void sale(){
+        Intent i = new Intent(this,insertTickets.class);
+        startActivity(i);
+    }
+
+    public void profile() {
+        Intent i = new Intent(this, profile.class);
+        startActivity(i);
     }
 
     public void logout() {
+        singleToneClass.getInstance().setIdSeller(0);
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
@@ -43,5 +70,9 @@ public class startMenu extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.finishAffinity();
+    }
 
 }
