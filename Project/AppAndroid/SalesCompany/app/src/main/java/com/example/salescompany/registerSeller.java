@@ -29,7 +29,7 @@ public class registerSeller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_seller);
 
-        registerSeller = (Button) findViewById(R.id.registerSeller);
+        registerSeller = (Button) findViewById(R.id.registerTicket);
 
         registerSeller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +45,9 @@ public class registerSeller extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         lastName = (EditText) findViewById(R.id.lastName);
         address = (EditText) findViewById(R.id.address);
-        telephone = (EditText) findViewById(R.id.userName);
-        email = (EditText) findViewById(R.id.telephone);
-        userName = (EditText) findViewById(R.id.email);
+        telephone = (EditText) findViewById(R.id.telephone);
+        email = (EditText) findViewById(R.id.email);
+        userName = (EditText) findViewById(R.id.userName);
         password = (EditText) findViewById(R.id.password);
 
         String sql = "http://"+singleToneClass.getIP()+"/SalesCompany/sales/service/seller";
@@ -108,70 +108,4 @@ public class registerSeller extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    public void executeUpdate() {
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        name = (EditText) findViewById(R.id.name);
-        lastName = (EditText) findViewById(R.id.lastName);
-        address = (EditText) findViewById(R.id.address);
-        telephone = (EditText) findViewById(R.id.userName);
-        email = (EditText) findViewById(R.id.telephone);
-
-        String sql = "http://"+singleToneClass.getIP()+"/SalesCompany/sales/service/seller/1";
-
-        URL url = null;
-        HttpURLConnection conn;
-
-        try {
-
-            JSONObject paramsString = new JSONObject();
-            paramsString.put("name", name.getText());
-            paramsString.put("lastName", lastName.getText());
-            paramsString.put("address", address.getText());
-            paramsString.put("telephone", telephone.getText());
-            paramsString.put("email", email.getText());
-
-            url = new URL(sql);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("PUT");
-            conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.writeBytes(paramsString.toString());
-            wr.flush();
-            wr.close();
-
-            conn.connect();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            String json = "";
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-
-            json = response.toString();
-
-            JSONObject jsonObject = new JSONObject(json);
-            Log.e("SALIDA", json);
-
-
-            if (jsonObject.optString("name").equals(name.getText().toString())) {
-                Toast.makeText(getApplicationContext(), "User Updated", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Error with Update", Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }

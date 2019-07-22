@@ -27,16 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
     EditText userName, password;
     Button register, btnLogin, btn;
-    String ip = "192.168.0.104:8080";
-
+    String ip = "3.222.209.189:8080";
+    singleToneClass singleToneClass = com.example.salescompany.singleToneClass.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(singleToneClass.getIdSeller()!=0){
+            Intent i = new Intent(this, startMenu.class);
+            startActivity(i);
+        }
 
-        singleToneClass singleToneClass = com.example.salescompany.singleToneClass.getInstance();
         singleToneClass.setIP(ip);
-
         register = (Button) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (jsonObject.optString("Execution").equals("true")) {
                 Intent i = new Intent(this, startMenu.class);
+                singleToneClass.setIdSeller(jsonObject.optInt("idSeller"));
+                //Toast.makeText(getApplicationContext(), singleToneClass.getIdSeller()+"", Toast.LENGTH_SHORT).show();
                 //this.finish();
                 startActivity(i);
             } else {
@@ -121,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.finishAffinity();
     }
 
 }
